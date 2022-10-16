@@ -5,6 +5,11 @@ const path = require('path');
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 
+const handlebars = require("express-handlebars");
+
+app.engine(".hbs", handlebars.engine({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("images"));
@@ -12,11 +17,15 @@ app.use(express.static("css"));
 
 
 app.get("/Blog", function(req, res) {
-    res.sendFile(path.join(__dirname, "blog.html"));    
+    res.render("blog", {layout: false });
+});
+
+app.get('/', function(req, res) {
+    res.render("blog", {layout: false });
 });
 
 app.get("/article", function(req, res) {
-    res.sendFile(path.join(__dirname, "read_more.html"));    
+    res.render("read_more", {layout: false });    
 });
 
 
@@ -31,7 +40,7 @@ letters and numbers only but the phone number mush be
 only numbers)
 */
 app.get("/registration", function(req, res) {
-    res.sendFile(path.join(__dirname, "registration.html"));    
+    res.render("registration", {layout: false });
 });
 
 // For the login form, you are required to check for nulls
@@ -39,50 +48,7 @@ app.get("/registration", function(req, res) {
 // respective text fields) and 
 //the username does not contain special character.
 app.get("/login", function(req, res) {
-    res.sendFile(path.join(__dirname, "login.html"));      
-});
-
-app.post("/login",function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
-    console.log("username = " + username); 
-    console.log("password = " + password);
-
-    res.send("username = " + username);
-    try{
-        if(username == null || username.length == 0) {
-            throw new Error("Please enter a username");
-        }
-        if(password == null || password.length == 0) {
-            throw new Error("Please enter a password");
-        }
-        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-        if(specialChars.test(username) == true){
-            throw new Error("User name cannot contain special symbols");
-        }
-    } catch(e){
-        console.log(e);
-    }
-});
-
-
-
-app.post("/dashboard",function(req, res) {
-    var firstName = req.body.firstName;
-    var lastName = req.body.lastName;
-    var email = req.body.email;
-    var phone = req.body.phone;
-
-    var password = req.body.password;
-    var confirmPassword = req.body.confirmPassword;
-
-    var street = req.body.street;
-    var addInfo = req.body.addInfo;
-    var zip = req.body.zip;
-    var place = req.body.place;
-    var country = req.body.country;
-    
-    console.log(firstName + " " + lastName);
+    res.render("login", {layout: false });      
 });
 
 
