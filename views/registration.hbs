@@ -17,16 +17,23 @@
           <div class="card card-registration card-registration-2" style="border-radius: 15px;">
             <div class="card-body p-0">
               <div class="row g-0" style="font-weight: bold;">
-                <form action="/dashboard" enctype="application/x-www-form-urlencoded" method="post" >
+                
+                <form action="/registration" enctype="application/x-www-form-urlencoded" method="post" >
                 <div class="col-lg-12">
                   <div class="p-5">
                     <h3 class="fw-normal mb-5" style="color: #4835d4;">Personal Information</h3>
           
                         <div class="row">
                           <div class="col-md-6 mb-4 pb-2">
-      
                             <div class="form-outline">
-                              <input type="text" id="form3Examplev2" class="form-control form-control-lg" name="firstName"/>
+                              {{#if sentData.errorMsg.firstname }}
+                              <spam style="color: red;">{{sentData.errorMsg.firstname}}</spam>
+                              {{/if}}
+                              {{#if sentData.errorMsg.firstNameChar }}
+                              <spam style="color: red;">{{sentData.errorMsg.firstNameChar}}</spam>
+                              {{/if}}
+                              <input type="text" id="form3Examplev2" class="form-control form-control-lg" name="firstName"
+                              value="{{sentData.data.firstname}}"/>
                               <label class="form-label" for="form3Examplev2">First name</label>
                             </div>
       
@@ -34,7 +41,14 @@
                           <div class="col-md-6 mb-4 pb-2">
       
                             <div class="form-outline">
-                              <input type="text" id="form3Examplev3" class="form-control form-control-lg" name="lastName" />
+                              {{#if sentData.errorMsg.lastName }}
+                              <spam style="color: red;">{{sentData.errorMsg.lastName}}</spam>
+                              {{/if}}
+                              {{#if sentData.errorMsg.lastnameChar }}
+                              <spam style="color: red;">{{sentData.errorMsg.lastnameChar}}</spam>
+                              {{/if}}
+                              <input type="text" id="form3Examplev3" class="form-control form-control-lg" name="lastName"
+                              value="{{sentData.data.lastName}}" />
                               <label class="form-label" for="form3Examplev3">Last name</label>
                             </div>
       
@@ -45,7 +59,8 @@
                             <div class="col-md-6 mb-4 pb-2">
         
                               <div class="form-outline">
-                                <input type="email" id="form3Examplev2" class="form-control form-control-lg" name="email" />
+                                <input type="email" id="form3Examplev2" class="form-control form-control-lg" name="email" 
+                                value="{{sentData.data.email}}"/>
                                 <label class="form-label" for="form3Examplev2">Email</label>
                               </div>
         
@@ -53,7 +68,11 @@
                             <div class="col-md-6 mb-4 pb-2">
         
                               <div class="form-outline">
-                                <input type="number" id="form3Examplev3" class="form-control form-control-lg" name="phone"/>
+                                {{#if sentData.errorMsg.phone}}
+                                  <spam style="color: red;">{{sentData.errorMsg.phone}}</spam>
+                                {{/if}}
+                                <input type="number" id="form3Examplev3" class="form-control form-control-lg" name="phone"
+                                value="{{sentData.data.phone}}"/>
                                 <label class="form-label" for="form3Examplev3">Phone number</label>
                               </div>
         
@@ -71,6 +90,13 @@
                               <div class="col-md-6 mb-4 pb-2">
           
                                 <div class="form-outline">
+                                  {{#if sentData.errorMsg.password}}
+                                  <spam style="color: red;">{{sentData.errorMsg.password}}</spam>
+                                  {{/if}}
+                                  <br>
+                                  {{#if sentData.errorMsg.passwordLength}}
+                                  <spam style="color: red;">{{sentData.errorMsg.passwordLength}}</spam>
+                                  {{/if}}
                                   <input type="password" id="form3Examplev2" class="form-control form-control-lg" name="password" />
                                   <label class="form-label" for="form3Examplev2">Password</label>
                                 </div>
@@ -79,6 +105,9 @@
                               <div class="col-md-6 mb-4 pb-2">
           
                                 <div class="form-outline">
+                                  {{#if sentData.errorMsg.confirmPassword}}
+                                  <spam style="color: red;">{{sentData.errorMsg.confirmPassword}}</spam>
+                                  {{/if}}
                                   <input type="password" id="form3Examplev3" class="form-control form-control-lg" name="confirmPassword" />
                                   <label class="form-label" for="form3Examplev3">Confirm Password</label>
                                 </div>
@@ -95,14 +124,16 @@
       
                         <div class="mb-4 pb-2">
                           <div class="form-outline form-white">
-                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" name="street" />
+                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" name="street" 
+                            value="{{sentData.data.street}}"/>
                             <label class="form-label" for="form3Examplea2">Street + Nr</label>
                           </div>
                         </div>
       
                         <div class="mb-4 pb-2">
                           <div class="form-outline form-white">
-                            <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="addInfo" />
+                            <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="addInfo"
+                            value="{{sentData.data.addInfo}}" />
                             <label class="form-label" for="form3Examplea3">Additional Information</label>
                           </div>
                         </div>
@@ -111,7 +142,8 @@
                           <div class="col-md-5 mb-4 pb-2">
       
                             <div class="form-outline form-white">
-                              <input type="text" id="form3Examplea4" class="form-control form-control-lg" name="zip" />
+                              <input type="text" id="form3Examplea4" class="form-control form-control-lg" name="zip" 
+                              value="{{sentData.data.zip}}" />
                               <label class="form-label" for="form3Examplea4">Zip Code</label>
                             </div>
       
@@ -119,7 +151,8 @@
                           <div class="col-md-7 mb-4 pb-2">
       
                             <div class="form-outline form-white">
-                              <input type="text" id="form3Examplea5" class="form-control form-control-lg" name="place" />
+                              <input type="text" id="form3Examplea5" class="form-control form-control-lg" name="place" 
+                              value="{{sentData.data.place}}"/>
                               <label class="form-label" for="form3Examplea5">Place</label>
                             </div>
       
@@ -128,7 +161,8 @@
       
                         <div class="mb-4 pb-2">
                           <div class="form-outline form-white">
-                            <input type="text" id="form3Examplea6" class="form-control form-control-lg" name="country"/>
+                            <input type="text" id="form3Examplea6" class="form-control form-control-lg" name="country"
+                            value="{{sentData.data.country}}"/>
                             <label class="form-label" for="form3Examplea6">Country</label>
                           </div>
                         </div>
@@ -146,6 +180,7 @@
       
                       </div>
                      </div>
+                     
                     </form>
               </div>
             </div>
