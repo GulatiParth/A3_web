@@ -72,7 +72,7 @@ app.post("/registration", function(req, res) {
     };
     // valid input
     if(obj.data.firstname && obj.data.lastname && obj.data.password){
-        res.render("dashboard", {layout: false });
+        res.render("dashboard", {valid : obj ,layout: "main" });
     }
     else{  
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -109,7 +109,7 @@ app.post("/registration", function(req, res) {
             obj.errorMsg.confirmPassword ="Password must match with confirmation";
     
         }
-        res.render("registration", { sentData : obj, layout: false });
+        res.render("registration", { sentData : obj, layout: "main" });
     }  
 });
 
@@ -119,7 +119,7 @@ app.post("/registration", function(req, res) {
 // respective text fields) and 
 //the username does not contain special character.
 app.get("/login", function(req, res) {    
-    res.render("login", {layout: false });       
+    res.render("login", {layout: "main" });       
 });
 
 app.post("/login", function(req, res) {
@@ -137,7 +137,7 @@ app.post("/login", function(req, res) {
        
     // valid input
     if(obj.data.username && obj.data.password){
-        res.render("dashboard", { layout: false });
+        res.render("dashboard", { layout: "main" });
     }
     else{  
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -151,7 +151,7 @@ app.post("/login", function(req, res) {
         else if(!obj.data.password){             // invalid password
             obj.errorMsg.Errorpassword ="Please enter a password";
         } 
-        res.render("login", { sentData : obj, layout: false });       
+        res.render("login", { sentData : obj, layout: "main" });       
     }  
 });
 
