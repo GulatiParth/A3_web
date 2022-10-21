@@ -72,7 +72,7 @@ app.post("/registration", function(req, res) {
     };
     // valid input
     if(obj.data.firstname && obj.data.lastname && obj.data.password){
-        res.render("dashboard", {valid : obj ,layout: "main" });
+        res.render("dashboard", {valid : obj ,layout: false });
     }
     else{  
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
@@ -119,7 +119,7 @@ app.post("/registration", function(req, res) {
 // respective text fields) and 
 //the username does not contain special character.
 app.get("/login", function(req, res) {    
-    res.render("login", {layout: "main" });       
+    res.render("login", {layout: false });       
 });
 
 app.post("/login", function(req, res) {
@@ -137,7 +137,7 @@ app.post("/login", function(req, res) {
        
     // valid input
     if(obj.data.username && obj.data.password){
-        res.render("dashboard", { layout: "main" });
+        res.render("dashboard", { layout: false });
     }
     else{  
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
