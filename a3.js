@@ -123,28 +123,35 @@ app.get("/login", function(req, res) {
 });
 
 app.post("/login", function(req, res) {
-    var username = req.body.username;
-    var password = req.body.password;
+    var obj = {
+        data:{
+            username : req.body.username,
+            password : req.body.password
+        },
+        errorMsg:{
+            Errorusername : "",
+            ErrorusernameChar : "",
+            Errorpassword :"" 
+        }
+    };
        
     // valid input
-    if(username && password){
-        res.render("dashboard", {layout: false });
+    if(obj.data.username && obj.data.password){
+        res.render("dashboard", { layout: false });
     }
     else{  
         var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
-        if(!username){  // invalid username
-            var errorUN="Please enter a username";
-            res.render("login", { errorMsg: errorUN, username:username, layout: false });
+        if(!obj.data.username){  // invalid username
+            obj.errorMsg.Errorusername ="Please enter a username";
         }
-        else if(format.test(username)){      // invalid username with special characters
-            var errorUNsc = "Username cannot contain special characters"
-            res.render("login", {errorMsg: errorUNsc, username:username, layout: false });
+        else if(format.test(obj.data.username)){      // invalid username with special characters
+            obj.errorMsg.ErrorusernameChar = "Username cannot contain special characters"
         } 
-        else if(!password){             // invalid password
-            var errorpw="Please enter a password";
-            res.render("login", { errorMsg: errorpw, password:password , layout: false });
-        }        
+        else if(!obj.data.password){             // invalid password
+            obj.errorMsg.Errorpassword ="Please enter a password";
+        } 
+        res.render("login", { sentData : obj, layout: false });       
     }  
 });
 

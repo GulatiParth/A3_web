@@ -22,17 +22,23 @@
                 <p class="text-white-50 mb-5">Please enter your Username and Password!</p>
       
                 <div class="form-outline form-white mb-4">
-                   {{#if errorMsg}}
-                    <h5 style="color:red;"> {{errorMsg}}</h5>   
-                    {{/if}}
+                   
                   <form action="/login" enctype="application/x-www-form-urlencoded" method="post">  
                    
-                    <input type="text" value="{{username}}" name="username" 
+                    {{#if sentData.errorMsg.Errorusername }}
+                      <spam style="color: red;">{{sentData.errorMsg.Errorusername}}</spam>
+                    {{/if}}
+                    {{#if sentData.errorMsg.firstNameChar }}
+                       <spam style="color: red;">{{sentData.errorMsg.ErrorusernameChar}}</spam>
+                    {{/if}}
+                    <input type="text" value="{{sentData.data.username}}" name="username" 
                     class="form-control form-control-lg" placeholder="Enter Username" />
 
                       <br><br>
-
-                    <input type="password" value="{{password}}" name="password"
+                    {{#if sentData.errorMsg.Errorpassword }}
+                      <spam style="color: red;">{{sentData.errorMsg.Errorpassword}}</spam>
+                    {{/if}}
+                    <input type="password" value="{{sentData.data.password}}" name="password"
                     class="form-control form-control-lg" placeholder="Enter password" />
 
                       <br><br>
